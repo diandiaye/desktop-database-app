@@ -1,5 +1,5 @@
 '''
-Kivy Catalog
+Kivy and python frontend app
 
 '''
 
@@ -104,10 +104,6 @@ class ScreenUI(GridLayout):
     pass
 
 class WidgetApp(App): 
-
-
-
-        
     
     def build(self):
         app = ScreenUI()
