@@ -1,5 +1,5 @@
 '''
-Kivy and python frontend app
+Kivy Catalog
 
 '''
 
@@ -8,19 +8,17 @@ kivy.require('1.4.2')
 import os
 import sys
 from kivy.app import App
-from kivy.factory import Factory
 from kivy.lang import Builder, Parser, ParserException
 from kivy.properties import ObjectProperty
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.codeinput import CodeInput
-from kivy.animation import Animation
-from kivy.clock import Clock
+
 from kivy.lang import Builder
 from kivy.uix.textinput import TextInput
 from kivy.uix.stacklayout import StackLayout
 from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
 from kivy.properties import StringProperty
+from kivy.config import Config
 
 import backend
 
@@ -35,11 +33,23 @@ Builder.load_string("""
             size: self.size
 
     FloatLayout:
+        
         Label:
             text: 'UI and Database prototype'
             pos: 230, 400
-            size_hint: 3, .5
-
+            size_hint: 3, .3
+        Label:
+            text: 'delete id #:'
+            pos: 250, 345
+            size_hint: 3, .3
+        Label:
+            text: 'format: (str,str,int,int)'
+            pos: 250, 250
+            size_hint: 3, .3
+        Label:
+            text: 'press view to see table'
+            pos: 250, 145
+            size_hint: 3, .3
         Button:
             text: "View"
             pos: 500, 100
@@ -48,14 +58,15 @@ Builder.load_string("""
         Button:
             text: "Add"
             pos: 500, 200
-            size_hint: 1.6, .5
+            size_hint: 1.6,.5
             on_press: root.adding(self.text)
+            
         Button:
             text: "Delete"
             pos: 500, 300
             size_hint: 1.6, .5
             on_press: root.remove(self.text)
-        
+            
         TextInput:
             id: bottom
             size_hint_y: None
@@ -81,6 +92,11 @@ Builder.load_string("""
 
         """)
 
+#set window size
+Config.set('graphics', 'resizable', '0')  
+Config.set('graphics', 'width', '750')
+Config.set('graphics', 'height', '500')
+
 strng = StringProperty()
 
 class ScreenUI(GridLayout):
@@ -104,6 +120,8 @@ class ScreenUI(GridLayout):
     pass
 
 class WidgetApp(App): 
+
+
     
     def build(self):
         app = ScreenUI()
@@ -111,3 +129,4 @@ class WidgetApp(App):
 
 if __name__ == '__main__':
     WidgetApp().run()
+    
